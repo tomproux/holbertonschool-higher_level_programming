@@ -1,4 +1,6 @@
-#!/usr/bin/python3
-uppercase = __import__('8-uppercase').uppercase
-uppercase("best")
-uppercase("Best School 98 Battery street")
+#!/usr/bin/env python3
+def uppercase(C):
+    if ord(C) >= 65 and ord(C) <= 90:
+        return True
+    else:
+        return False
