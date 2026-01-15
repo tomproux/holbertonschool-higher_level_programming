@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
-uppercase = __import__('8-uppercase').uppercase
-uppercase("best")
-uppercase("Best School 98 Battery street")
+def islower(c):
+    if ord(c) >= 97 and ord(c) <= 122:
+        return True
+    else:
+        return False
