@@ -4,8 +4,8 @@ def square_matrix_simple(matrix=[]):
 
 
 matrix = [
-    [1, 2, 3]
-    [4, 5, 6]
+    [1, 2, 3],
+    [4, 5, 6],
     [7, 8, 9]
 ]
 resultat = map(square_matrix_simple, matrix)
