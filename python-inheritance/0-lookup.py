@@ -4,4 +4,4 @@
 
 def lookup(obj):
     """Return a list of an object's available attributes."""
-    return list(obj)
+    return (list(obj))
