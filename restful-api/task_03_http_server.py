@@ -1,59 +1,53 @@
 #!/usr/bin/python3
-"""Module to implement http.server module"""
+"""Module that add a class who deal with the requests of web site, and a script
+that start a local http server"""
 import http.server
 import json
 
 
-class HTTPHandler(http.server.BaseHTTPRequestHandler):
-    """Simple Handler class inherited from BaseHTTPRequestHandler"""
+class dynamic_handler(http.server.BaseHTTPRequestHandler):
+    """Class that deal with the requests of the users"""
 
     def do_GET(self):
-        """Method to handle GET requests"""
-
-        # Base case
-        if self.path == '/':
+        """All the methods to deal with some endpoints"""
+        if self.path == "/data":
             self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write('Hello, this is a simple API!'.encode())
+            new_dict = {"name": "John", "age": 30, "city": "New York"}
+            data = json.dumps(new_dict)
+            self.wfile.write(data.encode("utf-8"))
 
-        # If /data is accessed
-        elif self.path == '/data':
+        elif self.path == "/status":
             self.send_response(200)
-            self.send_header('Content-type', 'application/json')
+            self.send_header("Content-type", "text/plain")
             self.end_headers()
-            data = {
-                "name": "John",
-                "age": 30,
-                "city": "New York"
-            }
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+            self.wfile.write("OK".encode("UTF-8"))
 
-        # /status endpoint
-        elif self.path == '/status':
+        elif self.path == "/info":
             self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write("OK".encode('utf-8'))
+            new_dict = {"version": "1.0",
+                        "description": "A simple API built with http.server"}
+            data = json.dumps(new_dict)
+            self.wfile.write(data.encode("utf-8"))
 
-        elif self.path == '/info':
-            self._set_headers(content_type='application/json')
-            data = {
-                "version": "1.0",
-                "description": "A simple API built with http.server"
-            }
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+        elif self.path == "/":
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            response = "Hello, this is a simple API!"
+            self.wfile.write(response.encode("utf-8"))
 
-        # Error 404 :)
         else:
             self.send_response(404)
-            self.send_header('Content-type', 'text/plain')
+            self.send_header("Content-type", "text/plain")
             self.end_headers()
-            self.wfile.write('404 Not Found'.encode())
+            self.wfile.write("Endpoint not found".encode("utf-8"))
 
 
-if __name__ == '__main__':
-    """Server initialization"""
-    server_address = ('', 8000)
-    httpserver = http.server.HTTPServer(server_address, HTTPHandler)
-    httpserver.serve_forever()
+server_adress = ('localhost', 8000)
+instance_server = http.server.HTTPServer(server_adress, dynamic_handler)
+print("serveur en cours d'execution")
+instance_server.serve_forever()
