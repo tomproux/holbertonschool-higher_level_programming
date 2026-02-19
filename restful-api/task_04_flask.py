@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-"""
-Petite API REST construite avec Flask pour gérer des utilisateurs.
-
-Fonctionnalités :
-- Accueil
-- Vérification du statut
-- Récupération de la liste des utilisateurs
-- Accès aux informations d’un utilisateur précis
-- Ajout d’un nouvel utilisateur via une requête POST
-"""
 
 # Importation du framework Flask et des fonctions nécessaires
 from flask import Flask
