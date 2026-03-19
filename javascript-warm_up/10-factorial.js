@@ -1,7 +1,7 @@
 #!/usr/bin/node
 const num = parseInt(process.argv[2]);
 
-function factorial(n) {
+function factorial (n) {
   if (isNaN(n) || n <= 1) return 1;
   return n * factorial(n - 1);
 }
