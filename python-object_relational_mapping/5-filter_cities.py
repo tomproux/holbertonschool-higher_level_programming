@@ -37,9 +37,9 @@ if __name__ == "__main__":
     # Fetch all results
     results = cursor.fetchall()
 
-    # Display results
-    for city in results:
-        print(city)
+    # Display results - only city names separated by commas
+    city_names = [city[1] for city in results]
+    print(", ".join(city_names))
 
     # Close cursor and database connection
     cursor.close()
