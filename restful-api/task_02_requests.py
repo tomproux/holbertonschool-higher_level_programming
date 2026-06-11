@@ -8,12 +8,19 @@ import requests
 API_URL = "https://jsonplaceholder.typicode.com/posts"
 
 
+def is_successful_response(response):
+    """Return True when a response indicates success."""
+    if hasattr(response, "ok"):
+        return bool(response.ok)
+    return getattr(response, "status_code", 0) < 400
+
+
 def fetch_and_print_posts():
     """Fetch all posts and print their titles."""
     response = requests.get(API_URL, timeout=10)
     print(f"Status Code: {response.status_code}")
 
-    if response.ok:
+    if is_successful_response(response):
         posts = response.json()
         for post in posts:
             print(post.get("title", ""))
@@ -25,7 +32,7 @@ def fetch_and_save_posts():
     """Fetch posts and save a CSV file with selected fields."""
     response = requests.get(API_URL, timeout=10)
 
-    if response.ok:
+    if is_successful_response(response):
         posts = response.json()
         simplified_posts = [
             {"id": post.get("id"), "title": post.get("title"), "body": post.get("body")}
