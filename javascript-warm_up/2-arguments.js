@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const { args } = require('node:process');
+const args = process.argv.slice(3);
 
 if (args === 0)
 {
