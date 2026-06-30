@@ -5,8 +5,8 @@ if (process.argv.length <= 3) {
 } else {
   const numbers = process.argv.slice(2).map(Number);
 
-  let largest = numbers[0];
-  let secondLargest = numbers[0];
+  let largest = -Infinity;
+  let secondLargest = -Infinity;
 
   for (const num of numbers) {
     if (num > largest) {
